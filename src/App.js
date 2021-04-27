@@ -1,5 +1,7 @@
 import './App.css';
 import ColorBox from './components/colorBox';
+import TodoFeature from './features/Todo/pages/index';
+import AlbumFeature from './features/Album/pages/index';
 
 const name = 'Hoang';
 
@@ -50,8 +52,12 @@ function App() {
             <li key={color} style={{color}}>{color}</li>
           ))}
         </ul>
+        <TodoFeature />
+        <AlbumFeature />
       </header>
+      
     </div>
+    
   );
 }
 
