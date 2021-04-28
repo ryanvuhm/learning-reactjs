@@ -1,0 +1,11 @@
+.todo-list__button {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    flex: row;
+    & > button {
+        font-size: 20px;
+        padding: 0 20px;
+        margin: 0 20px;
+    }
+}

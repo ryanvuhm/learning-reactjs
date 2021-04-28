@@ -2,6 +2,7 @@ import './App.css';
 import ColorBox from './components/colorBox';
 import TodoFeature from './features/Todo/pages/index';
 import AlbumFeature from './features/Album/pages/index';
+import Clock from './components/Clock/components/index'
 
 const name = 'Hoang';
 
@@ -18,6 +19,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Clock />
         <p>
           Ping!
         </p>
@@ -54,6 +56,7 @@ function App() {
         </ul>
         <TodoFeature />
         <AlbumFeature />
+        
       </header>
       
     </div>

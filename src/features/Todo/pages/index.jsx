@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import TodoList from '../components/TodoList';
-
+import './styles.scss';
 TodoFeature.propTypes = {
     
 };
@@ -37,11 +36,12 @@ function TodoFeature(props) {
     ];
 
     const [todoList, setTodoList] = useState(initTodoList);
-
+    const [filterStatus, setFilterStatus] = useState('all');
+    
     const handleTodoClick = (todo, idx) => {
         // clone current array to the new one
         const newTodoList = [...todoList];
-        
+
         // toggle state
         newTodoList[idx] = {
             ...newTodoList[idx],
@@ -50,10 +50,27 @@ function TodoFeature(props) {
         setTodoList(newTodoList);
     }
 
+    const handleShowAllClick = () => {
+        setFilterStatus('all');
+    };
+    const handleShowNewClick = () => {
+        setFilterStatus('new');
+    };
+    const handleShowCompletedClick = () => {
+        setFilterStatus('completed');
+    };
+
+    const renderTodoList = todoList.filter(todo => filterStatus === 'all' || filterStatus === todo.status); 
+    console.log(renderTodoList)
     return (
         <div>
             <h3>Todo list</h3>
-            <TodoList todoList={todoList} onTodoClick={handleTodoClick}/>
+            <TodoList todoList={renderTodoList} onTodoClick={handleTodoClick}/>
+            <div className = "todo-list__button">
+                <button onClick={handleShowAllClick}>All</button>
+                <button onClick={handleShowNewClick}>New</button>
+                <button onClick={handleShowCompletedClick}>Completed</button>
+            </div>
         </div>
     );
 }
