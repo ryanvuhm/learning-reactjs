@@ -6,9 +6,9 @@ function formatDate(date) {
     const hours = `0${date.getHours()}`.slice(-2);
     const minutes = `0${date.getMinutes()}`.slice(-2);
     const seconds = `0${date.getSeconds()}`.slice(-2);
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
+    const day = `0${date.getDate()}`.slice(-2);
+    const month = `0${date.getMonth()}`.slice(-2);
+    const year = `0${date.getFullYear()}`.slice(-2);
     return `${hours}:${minutes}:${seconds} - 
             ${day}/${month}/${year}
     `;

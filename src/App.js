@@ -2,7 +2,9 @@ import './App.css';
 import ColorBox from './components/colorBox';
 import TodoFeature from './features/Todo/pages/index';
 import AlbumFeature from './features/Album/pages/index';
+import NotFound from './components/NotFound/index';
 import Clock from './components/Clock/components/index'
+import { Route, Link, NavLink, Switch, Redirect } from 'react-router-dom';
 
 const name = 'Hoang';
 
@@ -19,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Clock />
+        {/* <Clock />
         <p>
           Ping!
         </p>
@@ -53,10 +55,26 @@ function App() {
           {colorList.map(color => (
             <li key={color} style={{color}}>{color}</li>
           ))}
-        </ul>
-        <TodoFeature />
-        <AlbumFeature />
-        
+        </ul> */}
+
+        <h1>Home Page</h1>
+
+        <h2>
+          <NavLink to='/todos'>TO DO</NavLink>
+        </h2>
+        <h2>
+          <NavLink to='/albums'>Albums</NavLink>
+        </h2>
+        <Switch>
+          <Redirect from="/home" to="/" exact />
+
+          <Route path="/" component={AlbumFeature} exact/>
+          <Route path="/todos" component={TodoFeature} />
+          <Route path="/albums" component={AlbumFeature} />
+
+          <Route component={NotFound} />
+        </Switch>
+
       </header>
       
     </div>

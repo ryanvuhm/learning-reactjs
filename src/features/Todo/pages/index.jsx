@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoList from '../components/TodoList';
+import queryString from 'query-string';
+import { useLocation, useHistory, useRouteMatch } from 'react-router-dom'
 import './styles.scss';
-TodoFeature.propTypes = {
-    
-};
+TodoFeature.propTypes = {};
 
 function TodoFeature(props) {
 
@@ -35,8 +35,21 @@ function TodoFeature(props) {
         }
     ];
 
+    const location = useLocation();
+    const history = useHistory();
+    const match = useRouteMatch();
     const [todoList, setTodoList] = useState(initTodoList);
-    const [filterStatus, setFilterStatus] = useState('all');
+    const [filterStatus, setFilterStatus] = useState(() => {
+        const params = queryString.parse(location.search);
+        console.log(params);
+
+        return params.status || 'all ';
+    });
+
+    useEffect(() => {
+        const params = queryString.parse(location.search);
+        setFilterStatus (params.status || 'all');
+    }, [location.search])
     
     const handleTodoClick = (todo, idx) => {
         // clone current array to the new one
@@ -51,16 +64,32 @@ function TodoFeature(props) {
     }
 
     const handleShowAllClick = () => {
-        setFilterStatus('all');
+        // setFilterStatus('all');
+        const queryParams = {status: 'all'};
+        history.push({
+            pathname: match.path,
+            search: queryString.stringify(queryParams),
+        });
     };
     const handleShowNewClick = () => {
-        setFilterStatus('new');
+        // setFilterStatus('new');
+        const queryParams = {status: 'new'};
+        history.push({
+            pathname: match.path,
+            search: queryString.stringify(queryParams),
+        });
     };
     const handleShowCompletedClick = () => {
-        setFilterStatus('completed');
+        // setFilterStatus('completed');
+        const queryParams = {status: 'completed'};
+        history.push({
+            pathname: match.path,
+            search: queryString.stringify(queryParams),
+        });
     };
 
-    const renderTodoList = todoList.filter(todo => filterStatus === 'all' || filterStatus === todo.status); 
+    const renderTodoList = todoList.filter(todo => filterStatus === 'all' || filterStatus === todo.status);
+
     console.log(renderTodoList)
     return (
         <div>
